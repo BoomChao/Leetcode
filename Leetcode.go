@@ -3,7 +3,7 @@
 	Leetcode第1178题: Number of Valid Words for Each Puzzle
 */
 
-func findNumOfValidWords(Words []string, puzzles []string) []int {
+func findNumOfValidWords(words []string, puzzles []string) []int {
 	mp := make(map[int]int)
 
 	for _, word := range words {
