@@ -1104,3 +1104,127 @@ func canPartition2(nums []int) bool {
 
 	return dp[sum]
 }
+
+//Leetcode第703题：Golang实现的优先队列
+
+type KthLargest struct {
+	h *IntHeap
+	k int
+}
+
+func Constructor(k int, nums []int) KthLargest {
+	h := &IntHeap{}
+	heap.Init(h)
+	for _, v := range nums {
+		heap.Push(h, v)
+	}
+	for i := 0; i < len(nums)-k; i++ {
+		heap.Pop(h)
+	}
+	return KthLargest{h, k}
+}
+
+func (this *KthLargest) Add(val int) int {
+	heap.Push(this.h, val)
+	if this.h.Len() > this.k {
+		heap.Pop(this.h)
+	}
+	return this.h.Peek().(int)
+}
+
+type IntHeap []int
+
+func (h IntHeap) Len() int           { return len(h) }
+func (h IntHeap) Less(i, j int) bool { return h[i] < h[j] } //实现小顶堆
+func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *IntHeap) Push(x interface{}) {
+	*h = append(*h, x.(int))
+}
+
+func (h *IntHeap) Peek() interface{} {
+	return (*h)[0]
+}
+
+func (h *IntHeap) Pop() interface{} {
+	x := (*h)[len(*h)-1]
+	*h = (*h)[0 : len(*h)-1]
+	return x
+}
+
+// Leetcode第131题 (关于切片slice的大坑--一定要注意)
+
+func partition(s string) [][]string {
+	res := [][]string{}
+
+	n := len(s)
+	dp := make([][]int, n)
+	for i := 0; i < n; i++ {
+		dp[i] = make([]int, n)
+	}
+
+	for i := n - 1; i >= 0; i-- {
+		for j := i; j < n; j++ {
+			if s[i] == s[j] && (j-i <= 2 || dp[i+1][j-1] == 1) {
+				dp[i][j] = 1
+			}
+		}
+	}
+
+	path := []string{}
+
+	dfs(s, 0, dp, path, &res)
+
+	return res
+}
+
+func dfs(s string, pos int, dp [][]int, path []string, res *[][]string) {
+	if pos == len(s) {
+		//fmt.Println(path)
+		*res = append(*res, path)                        //1.这种写法会有bug
+		*res = append(*res, append([]string{}, path...)) //2.这种写法没有bug
+		//fmt.Println(*res)
+		return
+	}
+
+	for i := pos; i < len(s); i++ {
+		if dp[pos][i] == 1 {
+			path = append(path, s[pos:i+1])
+			dfs(s, i+1, dp, path, res)
+			path = path[:len(path)-1]
+		}
+	}
+
+}
+
+//Leetcode第382题：蓄水池抽样问题(着重看这代码的写法)
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+type Solution struct {
+	head *ListNode
+}
+
+func Constructor(head *ListNode) Solution {
+	return Solution{
+		head: head,
+	}
+}
+
+func (this *Solution) GetRandom() int {
+	n, res := 2, this.head.Val
+	cur := this.head.Next
+
+	for cur != nil {
+		if rand.Intn(n) == 0 {
+			res = cur.Val
+		}
+		n++
+		cur = cur.Next
+	}
+
+	return res
+}
