@@ -1,10 +1,10 @@
 ### Leetcode_Algorithm
 
-1.BFS 主要是与广度优先搜索，如单词搜索，课表排序，滑动谜题等
+1. BFS 主要是与广度优先搜索，如单词搜索，课表排序，滑动谜题等
 
-2.BitOpt.cc 主要是与位运算相关
+2. BitOpt.cc 主要是与位运算相关
 
-3.Design_Structure 主要是与设计一些数据结构, 如设计LRU, 设计Twitter, 设计队列，字典树等等
+3. Design_Structure 主要是与设计一些数据结构, 如设计LRU, 设计Twitter, 设计队列，字典树等等
 
 4.DFS 主要是深度优先相关
 
