@@ -818,3 +818,54 @@ int lastRemaining(int n, int m)
     return val;
 }
 
+
+///////////////////////////////
+//
+//      链表找环
+//      第142题: 链表找到环的入口点
+//      第287题: 找到重复的数字
+//
+///////////////////////////////
+
+
+// 链表找环(第142题)
+// L1: 头节点到入口的距离
+// L2: 链表入口到相遇点的距离
+// C: 环的长度
+// 使用快慢指针: 慢指针走L1+L2,快指针走2(L1+L2)
+// 2*(L1+L2) = L1 + L2 + n*C => L1 = (n-1)*C + (C-L2)
+// 说明如果一个指针从头部出发,另外一个指针从相遇点出发,他们会在环的入口相遇
+
+ListNode *detectCycle(ListNode *head) {
+    ListNode *fast = head, *slow = head;
+    while(fast && fast->next) {
+        fast = fast->next->next;
+        slow = slow->next;
+        if(fast == slow) {
+            ListNode *pNode = head;
+            while(pNode != slow) {
+                pNode = pNode->next;
+                slow = slow->next;
+            }
+            return pNode;
+        }
+    }
+    return nullptr;
+}
+
+int findDuplicate(vector<int>& nums) {
+    int slow = nums[0], fast = nums[slow];
+
+    while(slow != fast) {
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    }
+
+    int finder = 0;
+    while(finder != slow) {
+        slow = nums[slow];
+        finder = nums[finder];
+    }
+
+    return slow;
+}
