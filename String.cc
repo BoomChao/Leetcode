@@ -251,7 +251,7 @@ std::string longestCommonSubstring(std::string s, std::string t)
 //   否则说明是从 dp[m][n-1]推导过来的, 将 j--
 // 3.最后将结果逆序即可
 
-int longesetCommonSubsequence(std::string text1, std::string text2)
+int longestCommonSubsequence(std::string text1, std::string text2)
 {
     int m = text1.size(), n = text2.size();
     std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1, 0));
