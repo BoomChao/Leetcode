@@ -244,7 +244,7 @@ int kthSmallest(std::vector<std::vector<int>> &matrix, int k)
 // 思路: 二分查找
 // 0.判断nums[mid]是否等于target, 等于直接返回mid
 // 1.当 nums[mid] 小于 nums[right] 时, 就表明右侧[mid, right]之间是有序的, 如果 nums[mid] < target < nums[right], 则left右移, 否则right左移
-// 2.当 nums[mid] 大于 nums[right] 时, 就表明左侧[left, mid]之间是有序的, 如果 nums[left] < tartet < nums[mid], 则right左移, 否则left右移
+// 2.当 nums[mid] 大于 nums[right] 时, 就表明左侧[left, mid]之间是有序的, 如果 nums[left] < target < nums[mid], 则right左移, 否则left右移
 
 // 3.当 nums[mid] 等于 nums[right]移动哪一侧都行(因为数组不存在重复元素,所以当且仅当 mid = right时会出现这种情况,也就是数组中不存在target)
 // 如 nums = {1}, target = 2
