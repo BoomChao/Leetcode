@@ -3,6 +3,89 @@
     链表题型总结
 */
 
+
+
+// 实现一个链表的增删改差
+
+struct Node {
+    int data;
+    Node *next;
+    Node(int data): data(data), next(nullptr) {}
+};
+
+
+class LinkedList {
+private:
+    Node *head;
+
+public:
+    LinkedList() : head(nullptr) {}
+
+    void insert(int data) {
+        Node *newNode = new Node(data);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    void remove(int data) {
+        Node *current = head;
+        Node *prev = nullptr;
+
+        while(current != nullptr && current->data != data) {
+            prev = current;
+            current = current->next;
+        }
+
+        if(current == nullptr) {
+            std::cout << "Node not found" << std::endl;
+            return;
+        }
+
+        if(prev == nullptr) {
+            head = current->next;
+        } else {
+            prev->next = current->next;
+        }
+
+        delete current;
+    }
+
+    void modify(int oldData, int newData) {
+        Node *current = head;
+
+        while(current != nullptr && current->data != oldData ) {
+            current = current->next;
+        }
+        if(current == nullptr) {
+            std::cout << "Node not found" << std::endl;
+            return;
+        }
+        current->data = newData;
+    }
+
+    bool search(int data) {
+        Node *current = head;
+        while(current != nullptr) {
+            if(current->data == data) return true;
+            current = current->next;
+        }
+        return false;
+    }
+
+    void print() {
+        Node *current = head;
+        while(current != nullptr) {
+            std::cout << current->data << " ";
+            current = current->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+
+
+
+
 ////////////////////////////////////
 //
 //  删除链表中的指定节点
