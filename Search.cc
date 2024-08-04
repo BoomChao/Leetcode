@@ -335,7 +335,7 @@ int minEatingSpeed(std::vector<int> &piles, int h)
     return left;
 }
 
-bool canFinsh(std::vector<int> &nums, int h, int speed)
+bool canFinish(std::vector<int> &nums, int h, int speed)
 {
     int times = 0;
 
