@@ -2,3 +2,4 @@ demo.cc
 demo
 test.cc
 test
+*.json

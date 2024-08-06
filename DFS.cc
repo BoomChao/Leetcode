@@ -368,7 +368,7 @@ std::vector<int> direction = {-1,0,1,0,-1};
 int maxAreaOfLands(std::vector<std::vector<int>> &grid)
 {
     int m = grid.size(), n = grid[0].size();
-
+    int res = 0;
     for(int i = 0; i < m; i++) {
         for(int j = 0; j < n; j++) {
             if(grid[i][j] == 1) {
