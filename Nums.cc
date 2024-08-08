@@ -277,7 +277,7 @@ bool increasingTriplet(std::vector<int> &nums)
             res.push_back(n);
         }
         else {
-            auto it = lower_bound(nums.begin(), nums.end(), n);
+            auto it = lower_bound(res.begin(), res.end(), n);
             *it = n;
         }
 
