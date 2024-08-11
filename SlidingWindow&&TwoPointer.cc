@@ -70,7 +70,7 @@ int minSubArrayLen(int target, std::vector<int> &nums)
 
     for(int right = 0; right < nums.size(); right++)
     {
-        sum += nums[righ];
+        sum += nums[right];
 
         while(sum >= target) {
             minLen = std::min(minLen, right - left + 1);
