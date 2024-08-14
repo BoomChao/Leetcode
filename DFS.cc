@@ -159,7 +159,7 @@ std::vector<std::string> removeInvalidParentheses(std::string s)
         }
     }
     
-    dfs(s, 0, left, right);
+    dfs(s, left, right, 0);
 
     return res;
 }
