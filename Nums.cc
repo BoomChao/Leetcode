@@ -880,9 +880,9 @@ void dfs(std::vector<int> &nums, std::vector<int> &path, int target, int pos)
         res.push_back(path);
         return;
     }
-    if(target < 0) return;      //减枝
+    if(target < 0) return;      // 减枝
 
-    for(int i = pos; i < nums.size(); i++) {        //如果要求不能有重复组合,下面加一行
+    for(int i = pos; i < nums.size(); i++) {        // 如果要求不能有重复组合,下面加一行
         path.push_back(nums[i]);                    // if(i > pos && nums[i] == nums[i-1]) continue;
         dfs(nums, path, target - nums[i], i);    
         path.pop_back();
