@@ -857,10 +857,10 @@ int singleNumber(std::vector<int> &nums)
 /////////////////////////////
 
 
-//Leetcode第39题:组合和
-//思路:DFS
-//时间复杂度:O(2^n)
-//对于每个元素，有选和不选这两种可能，一共有n个元素，所以有2^n种可能
+// Leetcode第39题:组合和
+// 思路:DFS
+// 时间复杂度:O(2^n)
+// 对于每个元素，有选和不选这两种可能，一共有n个元素，所以有2^n种可能
 
 std::vector<std::vector<int>> res;
 
