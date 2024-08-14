@@ -166,7 +166,7 @@ std::vector<std::string> removeInvalidParentheses(std::string s)
 
 void dfs(std::string s, int left, int right, int pos)
 {
-    if(left < 0 || right < 0) return false;     //减枝
+    if(left < 0 || right < 0) return;     //减枝
 
     if(left == 0 && right == 0) {
         if(isValid(s)) {
