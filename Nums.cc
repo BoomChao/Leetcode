@@ -58,7 +58,7 @@ int maxSubArrayCircular(std::vector<int> &nums)
 //时间复杂度O(nlogn)
 //空间复杂度O(n)
 
-int maxSubarrySumNoMoreThanK(std::vector<int> &nums, int k)
+int maxSubArraySumNoMoreThanK(std::vector<int> &nums, int k)
 {
     std::set<int> mySet;
     mySet.insert(0);        //这是为了防止数组只有一个元素的情况，比如{2}, k=2
@@ -79,7 +79,7 @@ int maxSubarrySumNoMoreThanK(std::vector<int> &nums, int k)
 
 //下面滑动窗口这种方式适合找到子数组和<=k的最大长度，不能找到<=k的最大的子数组和
 //
-int maxSubarrySumNoMoreThanK(std::vector<int> &nums, int k)
+int maxSubArraySumNoMoreThanK(std::vector<int> &nums, int k)
 {
     int n = nums.size();
 
