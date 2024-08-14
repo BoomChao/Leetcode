@@ -435,7 +435,7 @@ int findLengthOfLCIS(std::vector<int> &nums)
 
 //方法一:两和相减
 
-int misssingNumber(std::vector<int> &nums)
+int missingNumber(std::vector<int> &nums)
 {
     int n = nums.size();
 
@@ -448,7 +448,7 @@ int misssingNumber(std::vector<int> &nums)
 
 //方法二:位运算
 
-int misssingNumber(std::vector<int> &nums)
+int missingNumber(std::vector<int> &nums)
 {
     int n = nums.size();
 
