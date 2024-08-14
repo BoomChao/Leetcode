@@ -462,7 +462,7 @@ int missingNumber(std::vector<int> &nums)
 }
 
 //方法三:交换的思想
-int misssingNumber(std::vector<int> &nums)
+int missingNumber(std::vector<int> &nums)
 {
     int n = nums.size();
 
