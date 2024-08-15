@@ -292,31 +292,31 @@ void shellSort(std::vector<int> &nums)
 
 void merge(int num[], int left, int mid, int right)
 {
-    int lindex = left;
-    int rindex = mid + 1;
+    int lIndex = left;
+    int rIndex = mid + 1;
     int *team = new int[right-left+1];
-    int teamindex = 0;
+    int teamIndex = 0;
 
-    while(lindex <= mid && rindex <= right)
+    while(lIndex <= mid && rIndex <= right)
     {
-        if(num[lindex] <= num[rindex]) {
-            team[teamindex++] = num[lindex++];
+        if(num[lIndex] <= num[rIndex]) {
+            team[teamIndex++] = num[lIndex++];
         }
         else {
-            team[teamindex++] = num[rindex++];
+            team[teamIndex++] = num[rIndex++];
         }
     }
 
-    while(lindex <= mid) {
-        team[teamindex++] = num[lindex++];
+    while(lIndex <= mid) {
+        team[teamIndex++] = num[lIndex++];
     }
 
     while(rindex <= right) {
-        team[teamindex++] = num[rindex++];
+        team[teamIndex++] = num[rIndex++];
     }
 
     //将排序好的数组传给num
-    for(int i = 0; i < teamindex; i++) {
+    for(int i = 0; i < teamIndex; i++) {
         num[left+i] = team[i];
     }
 
