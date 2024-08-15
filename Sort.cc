@@ -386,16 +386,16 @@ void quickSort(int num[], int low, int hig)
 
 int partition(int num[], int low, int hig)
 {
-    int pivotkey = num[low];
+    int pivotKey = num[low];
 
     while(low < hig)        //注意:这里不能写成low<=hig,如果是low等于hig则下面任何语句都不会执行,则程序会进入死循环
     {
-        while(low < hig && num[hig] >= pivotkey) {
+        while(low < hig && num[hig] >= pivotKey) {
             hig--;
         }
         std::swap(num[low], num[hig]);  //将比枢轴小的元素放在左边
 
-        while(low < hig && num[low] <= pivotkey) {
+        while(low < hig && num[low] <= pivotKey) {
             low++;
         }
         std::swap(num[low], num[hig]);  //将比枢轴大的元素放在右边
