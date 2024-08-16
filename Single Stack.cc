@@ -43,8 +43,8 @@ int trap(std::vector<int> &height)
 }
 
 
-//Leetcode第739题 : 每日温度
-//维持一个单调递减栈
+// Leetcode第739题 : 每日温度
+// 维持一个单调递减栈
 
 std::vector<int> dailyTemperatures(std::vector<int> &T)
 {
