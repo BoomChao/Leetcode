@@ -13,8 +13,8 @@
     496题 + 503题 + 556题 : 下一个更大的数字
 */
 
-//Leetcode第42题:接雨水
-//维持一个单调递减栈
+// Leetcode第42题:接雨水
+// 维持一个单调递减栈
 
 int trap(std::vector<int> &height)
 {
