@@ -150,10 +150,10 @@ std::vector<int> nextGreaterElement(std::vector<int> &nums1, std::vector<int> &n
 }
 
 
-//Leetcode第503题 : Next Greater Element II 
+// Leetcode第503题 : Next Greater Element II 
 
-//思路:第一次遍历得到正常数组的下一个比当前数值大的元素
-//第二次遍历得到比环形数组的下一个比当前数值大的元素
+// 思路:第一次遍历得到正常数组的下一个比当前数值大的元素
+// 第二次遍历得到比环形数组的下一个比当前数值大的元素
 
 std::vector<int> nextGreaterElement(std::vector<int> &nums)
 {
