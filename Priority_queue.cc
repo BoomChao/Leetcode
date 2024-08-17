@@ -113,10 +113,10 @@ std::priority_queue<Node, std::vector<Node>, Cmp> pq;
 ///////////////////////////////////////////
 
 
-//Leetcode第347题:Top k问题
-//思路:哈希map+优先队列 (题目出的非常好)
+// Leetcode第347题:Top k问题
+// 思路:哈希map+优先队列 (题目出的非常好)
 
-//下面这种方法的思路是频次在前,元素在后,这样就可以不用再重写优先队列里面元素的排列规则
+// 下面这种方法的思路是频次在前,元素在后,这样就可以不用再重写优先队列里面元素的排列规则
 
 std::vector<int> topKFrequent(std::vector<int> &nums, int k)
 {
