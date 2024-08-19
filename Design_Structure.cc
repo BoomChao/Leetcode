@@ -116,16 +116,16 @@ private:
 
 
 
-//Leetcode第295题:数据流中的中位数
-//优先队列的使用
+// Leetcode第295题:数据流中的中位数
+// 优先队列的使用
 
 // 思路:定义两个队列
 // minQue : 小(队头) -> 大
 // maxQue : 大(队头) -> 小
 
-//方法一: maxQue放在前面, minQue放在后面, minQue的最小值大于maxQue的最大值
-//方法二: minQue放在前面, maxQue放在后面, maxQue的最大值小于minQue的最小值
-//本质上还是一种方法，只不过两种比较形式
+// 方法一: maxQue放在前面, minQue放在后面, minQue的最小值大于maxQue的最大值
+// 方法二: minQue放在前面, maxQue放在后面, maxQue的最大值小于minQue的最小值
+// 本质上还是一种方法，只不过两种比较形式
 
 // 当元素比minQue队头元素大,则直接放入minQue队列
 // 如果minQue队列元素比maxQue队列元素个数相差为2,则将多的元素移动到少的队列中去
