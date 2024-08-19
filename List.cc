@@ -233,17 +233,17 @@ ListNode* deleteDuplicates(ListNode *head)
 {
     if(head == nullptr || head->next == nullptr) return head;
 
-    ListNode *base = new ListNode(-1);  //头节点可能被删除,另外定义一个base节点指向头结点(这一题必须定义一个base)
+    ListNode *base = new ListNode(-1);  // 头节点可能被删除,另外定义一个base节点指向头结点(这一题必须定义一个base)
     base->next = head;
     ListNode *cur = base;
 
     while(cur->next && cur->next->next) 
     {
-        //存在相同的节点
+        // 存在相同的节点
         if(cur->next->val == cur->next->next->val) 
         {
             int value = cur->next->val;
-            ListNode *pNode = cur->next;          //找到第一个元素不等于value的节点
+            ListNode *pNode = cur->next;          // 找到第一个元素不等于value的节点
             while(pNode && pNode->val == value) {
                 pNode = pNode->next;
             }
