@@ -6,8 +6,8 @@
 */
 
 
-//Leetcode第146题 : 设计LRU缓存机制
-//关键在于list的操作以及对splice方法的使用
+// Leetcode第146题 : 设计LRU缓存机制
+// 关键在于list的操作以及对splice方法的使用
 
 class LRUCache()
 {
