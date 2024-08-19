@@ -340,7 +340,7 @@ struct Cmp {
 
 ListNode* mergeKLists(std::vector<ListNode*> &lists)
 {
-    std::prioriry_queue<ListNode*, std::vector<ListNode*>, Cmp> pq;
+    std::priority_queue<ListNode*, std::vector<ListNode*>, Cmp> pq;
 
     /*
     for(int i = 0; i < lists.size(); i++) {
