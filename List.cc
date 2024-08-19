@@ -259,7 +259,7 @@ ListNode* deleteDuplicates(ListNode *head)
 }
 
 
-//Leetcode第23题:　合并k个链表
+// Leetcode第23题:　合并k个链表
 
 // 解法一：两两合并
 // 时间复杂度分析 :　假设初始k个链表的初始平均长度为n,则第一次合并时间复杂度为(k/2)*(2n), 第二次合并时间复杂度为 (k/4)*(4n), ...
