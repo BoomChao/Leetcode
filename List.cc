@@ -729,8 +729,8 @@ ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
 
 
 
-//Leetcode第86题：切分链表
-//画图来理解
+// Leetcode第86题：切分链表
+// 画图来理解
 
 ListNode* partition(ListNode *head, int x)
 {
@@ -760,7 +760,7 @@ ListNode* partition(ListNode *head, int x)
 
 
 
-//Leetcode第328题: 奇偶链表拆分
+// Leetcode第328题: 奇偶链表拆分
 
 ListNode *oddEvenList(ListNode *head)
 {
@@ -769,7 +769,7 @@ ListNode *oddEvenList(ListNode *head)
     ListNode *pOdd = head, pEven = head->next;
     ListNode *pHead = pEven;
 
-    //这个pEven->next一定要加,防止链表个数为偶数
+    // 这个pEven->next一定要加,防止链表个数为偶数
     while(pEven && pEven->next) {
         pOdd = pOdd->next = pEven->next;
         pEven = pEven->next = pOdd->next;
