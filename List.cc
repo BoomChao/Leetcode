@@ -492,7 +492,7 @@ ListNode* reverse(ListNode *head, ListNode *tail)
 }
 
 
-//Leetcode第206: 翻转链表(递归写法)
+// Leetcode第206: 翻转链表(递归写法)
 
 ListNode *reverseList(ListNode *head)
 {
@@ -514,8 +514,8 @@ ListNode* dfs(ListNode *head, ListNode *prev)
 
 
 
-//Leetcode第92题: 翻转链表II
-//找到前一个节点prev和后一个节点tail, 翻转(prev->next,tail)之间的部分再合并即可
+// Leetcode第92题: 翻转链表II
+// 找到前一个节点prev和后一个节点tail, 翻转(prev->next,tail)之间的部分再合并即可
 
 ListNode *reverseBetween(ListNode *head, int left, int right)
 {
