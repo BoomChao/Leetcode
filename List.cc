@@ -227,7 +227,7 @@ ListNode* deleteDuplicate(ListNode *head)
 }
 
 
-//Leetcode第82题:删除链表中重复的所有元素
+// Leetcode第82题:删除链表中重复的所有元素
 
 ListNode* deleteDuplicates(ListNode *head)
 {
