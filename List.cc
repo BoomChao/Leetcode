@@ -206,7 +206,7 @@ ListNode* removeNthFromEnd(ListNode *head, int n)
 
 
 
-//Leetcode第83题:删除链表中多余的重复元素
+// Leetcode第83题:删除链表中多余的重复元素
 
 ListNode* deleteDuplicate(ListNode *head)
 {
