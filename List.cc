@@ -672,7 +672,7 @@ ListNode *sortList(ListNode *head)
     // ListNode *l2 = sortList(head2);
 
     // return mergeList(l1, l2);
-    return mergeList(sort(head), sort(head2));
+    return mergeList(sortList(head), sortList(head2));
 }
 
 ListNode *mergeList(ListNode *head1, ListNode *head2)
