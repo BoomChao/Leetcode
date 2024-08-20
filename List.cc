@@ -154,13 +154,13 @@ ListNode* deleteNode(ListNode *head, ListNode *pDelete)
 }
 
 
-//Leetcode第19题:删除链表中倒数第n个节点
-//快慢指针
+// Leetcode第19题:删除链表中倒数第n个节点
+// 快慢指针
 
-//方法一:使用base
+// 方法一:使用base
 
-//1.快指针先走n步,走完n步后,慢指针出发,直到快指针到达最后一个节点
-//2.将慢指针next指向下下一个节点
+// 1.快指针先走n步,走完n步后,慢指针出发,直到快指针到达最后一个节点
+// 2.将慢指针next指向下下一个节点
 
 ListNode* removeNthFromEnd(ListNode *head, int n)
 {
@@ -182,7 +182,7 @@ ListNode* removeNthFromEnd(ListNode *head, int n)
     return base->next;
 }
 
-//方法二:不使用base
+// 方法二:不使用base
 ListNode* removeNthFromEnd(ListNode *head, int n)
 {
     ListNode *fast = head, *slow = head;
