@@ -642,10 +642,10 @@ int findDuplicate(std::vector<int> &nums)
 
 
 
-//Leetcode第41题 : 找到第一个缺失的正整数
+// Leetcode第41题 : 找到第一个缺失的正整数
 
-//思路(交换):将所有的正整数放到规定的位置上
-//因为如果元素不缺失,则数组应该为[1,2,3,4..,n]
+// 思路(交换):将所有的正整数放到规定的位置上
+// 因为如果元素不缺失,则数组应该为[1,2,3,4..,n]
 
 int firstMissingPositive(std::vector<int> &nums)
 {
