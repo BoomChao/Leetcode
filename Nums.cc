@@ -994,14 +994,14 @@ bool canJump(std::vector<int> &nums)
     {        
         maxPos = std::max(maxPos, i + nums[i]);
 
-        if(maxPos <= i) return false;   //当前位置元素为0且最大位置不超过当前元素时则一定不能跳过去
+        if(maxPos <= i) return false;   // 当前位置元素为0且最大位置不超过当前元素时则一定不能跳过去
     }
 
     return true;
 }
 
 
-//Leetcode第45题 : Jump Game II
+// Leetcode第45题 : Jump Game II
 
 int jump(std::vector<int> &nums)
 {
@@ -1021,17 +1021,17 @@ int jump(std::vector<int> &nums)
 }
 
 
-//Leetcode第1306题: Jump Game III
-//DFS
+// Leetcode第1306题: Jump Game III
+// DFS
 
 // 将遍历过的坐标全部记录下来以免重复遍历
 std::unordered_set<int> mySet;
 
 bool canReach(std::vector<int> &arr, int start)
 {
-    //向集合set中插入元素返回一个pair
-    //pair::second是一个bool值,如果插入成功,则返回true,否则返回false
-    //pair::first被设置成指向新插入元素的迭代器或者指向等值的已经存在的元素的迭代器
+    // 向集合set中插入元素返回一个pair
+    // pair::second是一个bool值,如果插入成功,则返回true,否则返回false
+    // pair::first被设置成指向新插入元素的迭代器或者指向等值的已经存在的元素的迭代器
     
     if(start >= 0 && start < arr.size() && mySet.insert(start).second) {
         return arr[start] == 0 || canReach(arr, start + arr[start]) || canReach(arr, start - arr[start]);
