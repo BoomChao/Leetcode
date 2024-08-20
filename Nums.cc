@@ -310,8 +310,7 @@ int longestConsecutive(std::vector<int> &nums)
     return res;
 }
 
-//方法二:时间复杂度为O(n)
-
+// 方法二:时间复杂度为O(n)
 // 1.将元素全部放入一个集合set中
 // 2.对集合中的元素从左(自减)右(自增)两边同时开始遍历,将集合中存在的元素删除
 
