@@ -351,7 +351,7 @@ func findDisapperaredNumbers(nums []int) []int {
 	return res
 }
 
-//注：Golang无三目运算符
+// 注：Golang无三目运算符
 func abs(n int) int {
 	// return n > 0 ? n : -1
 	if n < 0 {
@@ -506,7 +506,7 @@ func productExceptSelf(nums []int) []int {
 	Leetcode第779题：打印所有的路径
 */
 
-//写法一
+// 写法一
 func allPathsSourceTarget(graph [][]int) [][]int {
 	res, path := [][]int{}, []int{}
 
@@ -532,7 +532,7 @@ func dfs(graph [][]int, cur int, res *[][]int, path *[]int) {
 	*path = (*path)[:len(*path)-1]
 }
 
-//写法二
+// 写法二
 var res = [][]int{}
 var path = []int{}
 
@@ -1016,8 +1016,8 @@ func Abs(a, b int) int {
 }
 
 /*
-	Day 12.9
-	Leetcode第1306题：Jump Game III
+Day 12.9
+Leetcode第1306题：Jump Game III
 */
 func canReach(arr []int, start int) bool {
 	mp := make(map[int]int, len(arr))
@@ -1080,7 +1080,7 @@ func canPartition(nums []int) bool {
 	return dp[n][sum]
 }
 
-//降维成一维写法
+// 降维成一维写法
 func canPartition2(nums []int) bool {
 	sum := 0
 	for _, n := range nums {
