@@ -76,7 +76,7 @@ func main() {
  A:可以在子case再加一个for select语句
 */
 
-// 这样如果ch1,ch2有数据,则永远是先从ch1里面拿出数据
+// 这样如果ch1,ch2有数据,则永远是先从ch1里面先拿出数据
 func priority(ch1, ch2 <-chan int, stopCh chan struct{}) {
 	for {
 		select {
