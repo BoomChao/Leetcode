@@ -103,6 +103,8 @@ func priority(ch1, ch2 <-chan int, stopCh chan struct{}) {
 	并发协程实现求和
 */
 
+// 下面这种方式是使用channel来进行同步的
+
 type task struct {
 	begin  int
 	end    int
