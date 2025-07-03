@@ -2,6 +2,7 @@ package interview
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -104,83 +105,50 @@ func priority(ch1, ch2 <-chan int, stopCh chan struct{}) {
 */
 
 // 下面这种方式是使用channel来进行同步的
-
-type task struct {
-	begin  int
-	end    int
-	result chan<- int
-}
-
-func (t task) do() {
+func add(wg *sync.WaitGroup, ch chan int, receiveCh chan int) {
+	defer wg.Done()
 	sum := 0
-	for i := t.begin; i < t.end; i++ {
-		sum += i
-	}
-	t.result <- sum
-}
 
-func buildTask(taskChan chan<- task, resultChan chan<- int, count int) {
-	group := count / 10
-	mod := count % 10
-	if mod != 0 {
-		group += 1
-	}
-	for i := 0; i < group; i++ {
-		end := (i + 1) * 10
-		if end > count {
-			end = count
+	for {
+		select {
+		case val, ok := <-ch:
+			if ok {
+				sum += val
+			} else {
+				receiveCh <- sum
+				return
+			}
 		}
-		tsk := task{
-			begin:  i * 10,
-			end:    end,
-			result: resultChan,
-		}
-		taskChan <- tsk
 	}
-	close(taskChan)
-}
-
-func distributeTask(taskChan <-chan task, workers int, done chan<- struct{}) {
-	for i := 0; i < workers; i++ {
-		go workerTask(taskChan, done)
-	}
-}
-
-func workerTask(taskChan <-chan task, done chan<- struct{}) {
-	for v := range taskChan {
-		v.do()
-		done <- struct{}{}
-	}
-}
-
-func closeResult(done chan struct{}, resultChan chan<- int, workers int) {
-	for i := 0; i < workers; i++ {
-		<-done
-	}
-	close(done)
-	close(resultChan)
-}
-
-func processResult(resultChan <-chan int) int {
-	sum := 0
-	for v := range resultChan {
-		sum += v
-	}
-	return sum
 }
 
 func main() {
-	workers := 5
-	count := 100
+	numOfTask := 10
+	wg := &sync.WaitGroup{}
+	ch := make(chan int, 20)
+	receiveCh := make(chan int, numOfTask)
 
-	taskChan := make(chan task, 10)
-	resultChan := make(chan int, 10)
-	done := make(chan struct{}, 10)
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 1; i <= 100; i++ {
+			ch <- i
+		}
+		close(ch)
+	}()
 
-	go buildTask(taskChan, resultChan, count)
-	go distributeTask(taskChan, workers, done)
-	closeResult(done, resultChan, workers)
+	for i := 0; i < numOfTask; i++ {
+		wg.Add(1)
+		go add(wg, ch, receiveCh)
+	}
+	wg.Wait()
 
-	sum := processResult(resultChan)
+	close(receiveCh)
+
+	sum := 0
+	for res := range receiveCh {
+		sum += res
+	}
+
 	fmt.Println(sum)
 }
