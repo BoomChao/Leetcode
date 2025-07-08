@@ -46,6 +46,8 @@ func main() {
 	两个协程交替打印10个字母和数字
 */
 
+// 下面这种写法不是很完美,因为最后协程会hang住，程序没有优雅退出
+
 var word = make(chan struct{}, 1)
 var num = make(chan struct{}, 1)
 
@@ -70,6 +72,63 @@ func main() {
 	go printNums()
 	go printWords()
 	time.Sleep(time.Second * 2)
+}
+
+// 参考这种写法,下面这种会优雅退出
+
+var ch = make(chan int)
+
+var ch1 = make(chan bool)
+
+var ch2 = make(chan bool)
+
+func main() {
+	wg := &sync.WaitGroup{}
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 10; i++ {
+			ch <- i
+		}
+		close(ch)
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for {
+			<-ch2
+			num, ok := <-ch
+			if !ok {
+				close(ch1)
+				return
+			}
+			fmt.Println(num)
+			ch1 <- true
+			time.Sleep(time.Millisecond * 300)
+		}
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for {
+			<-ch1
+			num, ok := <-ch
+			if !ok {
+				close(ch2)
+				return
+			}
+			fmt.Println(num)
+			ch2 <- true
+			time.Sleep(time.Millisecond * 300)
+		}
+	}()
+
+	ch2 <- true
+
+	wg.Wait()
 }
 
 /*
