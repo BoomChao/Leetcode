@@ -152,51 +152,43 @@ func priority(ch1, ch2 <-chan int, stopCh chan struct{}) {
 	并发协程实现求和
 */
 
-// 下面这种方式是使用channel来进行同步的
-func add(wg *sync.WaitGroup, ch chan int, receiveCh chan int) {
-	defer wg.Done()
-	sum := 0
-
-	for {
-		select {
-		case val, ok := <-ch:
-			if ok {
-				sum += val
-			} else {
-				receiveCh <- sum
-				return
-			}
-		}
-	}
-}
-
 func main() {
-	numOfTask := 10
 	wg := &sync.WaitGroup{}
-	ch := make(chan int, 20)
-	receiveCh := make(chan int, numOfTask)
+
+	numOfTasks := 20
+
+	ch := make(chan int)
+	sum := make(chan int, numOfTasks)
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for i := 1; i <= 100; i++ {
+		for i := 0; i <= 100; i++ {
 			ch <- i
 		}
 		close(ch)
 	}()
 
-	for i := 0; i < numOfTask; i++ {
+	for i := 0; i < numOfTasks; i++ {
 		wg.Add(1)
-		go add(wg, ch, receiveCh)
+		go func() {
+			defer wg.Done()
+			subSum := 0
+			for num := range ch {
+				subSum += num
+			}
+			sum <- subSum
+		}()
 	}
 	wg.Wait()
 
-	close(receiveCh)
+	// 这里需要先关闭
+	close(sum)
 
-	sum := 0
-	for res := range receiveCh {
-		sum += res
+	res := 0
+	for n := range sum {
+		res += n
 	}
 
-	fmt.Println(sum)
+	fmt.Println(res)
 }
