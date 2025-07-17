@@ -76,57 +76,46 @@ func main() {
 
 // 参考这种写法,下面这种会优雅退出
 
-var ch = make(chan int)
+var chNum = make(chan bool)
 
-var ch1 = make(chan bool)
-
-var ch2 = make(chan bool)
+var chChar = make(chan bool)
 
 func main() {
+
 	wg := &sync.WaitGroup{}
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 10; i++ {
-			ch <- i
+			_, ok := <-chNum
+			if !ok {
+				break
+			}
+			fmt.Println(i)
+			chChar <- true
 		}
-		close(ch)
+		close(chChar)
 	}()
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for {
-			<-ch2
-			num, ok := <-ch
+		for i := 0; i < 10; i++ {
+			_, ok := <-chChar
 			if !ok {
-				close(ch1)
-				return
+				break
 			}
-			fmt.Println(num)
-			ch1 <- true
-			time.Sleep(time.Millisecond * 300)
+			fmt.Printf("%c\n", i+'A')
+			chNum <- true
 		}
+		close(chNum)
 	}()
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for {
-			<-ch1
-			num, ok := <-ch
-			if !ok {
-				close(ch2)
-				return
-			}
-			fmt.Println(num)
-			ch2 <- true
-			time.Sleep(time.Millisecond * 300)
-		}
-	}()
+	chNum <- true
 
-	ch2 <- true
+	// 这里一定要从channel里面读出数据,因为这是无缓冲的channel,否则上面的 chNum<-true写入会阻塞,因为没有下游来读
+	<-chNum
 
 	wg.Wait()
 }
