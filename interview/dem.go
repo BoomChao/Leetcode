@@ -46,6 +46,57 @@ func main() {
 	time.Sleep(time.Second * 10)
 }
 
+// 优雅退出的写法
+
+var first = make(chan bool)
+var second = make(chan bool)
+var third = make(chan bool)
+
+func main() {
+	wg := &sync.WaitGroup{}
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 10; i++ {
+			<-first
+			fmt.Println(1)
+			second <- true
+		}
+		close(second)
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 10; i++ {
+			<-second
+			fmt.Println(2)
+			third <- true
+		}
+		close(third)
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 10; i++ {
+			<-third
+			fmt.Println(3)
+			first <- true
+		}
+		close(first)
+	}()
+
+	first <- true
+
+	time.Sleep(time.Second)
+
+	<-first
+
+	wg.Wait()
+}
+
 /*
 	两个协程交替打印10个字母和数字
 */
