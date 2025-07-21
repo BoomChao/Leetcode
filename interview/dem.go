@@ -7,38 +7,42 @@ import (
 )
 
 /*
-	有三个函数，分别打印"cat", "fish","dog"要求每一个函数都用一个goroutine，按照顺序打印100次。
+协程交叉打印123
 */
 
-var cat = make(chan struct{})
-var dog = make(chan struct{})
-var fish = make(chan struct{})
+// 下面这种写法缺点就是没有优雅退出
 
-func Dog() {
-	<-fish
-	fmt.Println("dog")
-	dog <- struct{}{}
-}
-
-func Fish() {
-	<-cat
-	fmt.Println("fish")
-	fish <- struct{}{}
-}
-
-func Cat() {
-	<-dog
-	fmt.Println("cat")
-	cat <- struct{}{}
-}
+var first = make(chan bool)
+var second = make(chan bool)
+var third = make(chan bool)
 
 func main() {
-	for i := 0; i < 100; i++ {
-		go Dog()
-		go Fish()
-		go Cat()
-	}
-	fish <- struct{}{}
+	go func() {
+		for {
+			<-first
+			fmt.Println(1)
+			time.Sleep(time.Second)
+			second <- true
+		}
+	}()
+	go func() {
+		for {
+			<-second
+			fmt.Println(2)
+			time.Sleep(time.Second)
+			third <- true
+		}
+	}()
+	go func() {
+		for {
+			<-third
+			fmt.Println(3)
+			time.Sleep(time.Second)
+			first <- true
+		}
+	}()
+
+	first <- true
 	time.Sleep(time.Second * 10)
 }
 
