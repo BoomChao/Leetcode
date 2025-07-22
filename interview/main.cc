@@ -63,3 +63,35 @@ std::string powN(std::string str, int n) {
 - root1
     -4 .txt
 */
+
+struct TreeNode {
+    std::string name;
+    std::map<std::string, TreeNode*> children;
+    TreeNode(const std::string m_name) : name(m_name) {}
+};
+
+TreeNode* buildTree(const std::vector<std::string> &paths) {
+    TreeNode *root = new TreeNode("root");
+    for(const std::string &path: paths) {
+        std::stringstream ss(path);
+        std::string part;
+        TreeNode *current = root;
+
+        while(getline(ss, part, "/")) {
+            if(part.empty()) continue;
+            if(current->children.find(part) == current->children.end()) {
+                current->children[part] = new TreeNode(part);
+            }
+            current = current->children[part];
+        }
+    }
+    return root;
+}
+
+void printFileTree(TreeNode *node, int indent = 0) {
+    if(!node) return;
+    std::cout << std::string(indent, ' ') << "- " << node->name << std::endl;
+    for(const auto &child : node->children) {
+        printFileTree(child.second, indent + 2);
+    }
+}
