@@ -44,3 +44,22 @@ std::string powN(std::string str, int n) {
     }
     return res;
 }
+
+
+/*
+给定一个文件路径的列表，将列表渲染成一颗文件树
+输入:
+"/root/path_a/1.txt"
+"/root/path_b/3.txt"
+"/root1/4.txt"
+"/root/path_a/2.txt"
+输出:
+- root
+    - path_a
+        - 1.txt
+        - 2.txt
+    - path_b
+        - 3.txtk
+- root1
+    -4 .txt
+*/
