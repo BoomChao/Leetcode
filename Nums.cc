@@ -1355,14 +1355,14 @@ Leetcode第253题(与牛客NC147题相同)
 //对于给定一个时刻,找到之前最先结束会议的时间,看看这个时间是否早于当前会议开始时间,如果早于那就不用申请新的会议室,否则需要申请新的会议室
 //使用最小堆
 
-int minMeetingRooms(std::vector<std::vector<int>> &intervals)
+int minMeetingRooms(std::vector<std::vector<int>> &nums)
 {
-    int n = intervals.size();
+    int n = nums.size();
 
-    sort(intervals.begin(), intervals.end());
+    sort(nums.begin(), nums.end());
 
     std::priority_queue<int, std::vector<int>, std::greater<int>> pq;
-    pq.push(intervals[0][1]);
+    pq.push(nums[0][1]);
 
     for(int i = 1; i < n; i++)
     {
