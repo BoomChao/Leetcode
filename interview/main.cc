@@ -95,3 +95,10 @@ void printFileTree(TreeNode *node, int indent = 0) {
         printFileTree(child.second, indent + 2);
     }
 }
+
+/*
+    对于一个链表,给定一个正整数数组作为输入,分段做反转
+    链表: 1->2->3->4->5->6->7->8->9
+    比如 [3,2,5]
+    输出新链表: 3->2->1->5->4->9->8->7->6
+*/
