@@ -71,30 +71,30 @@ struct TreeNode {
 };
 
 TreeNode* buildTree(const std::vector<std::string> &paths) {
-    TreeNode *root = new TreeNode("root");
-    for(const std::string &path: paths) {
-        std::stringstream ss(path);
+    TreeNode *root = new TreeNode("");
+    for(const std::string &path : paths) {
+        std::stringstream in(path);
         std::string part;
-        TreeNode *current = root;
-
-        while(getline(ss, part, "/")) {
+        TreeNode *cur = root;
+        while(getline(in, part, '/')) {
             if(part.empty()) continue;
-            if(current->children.find(part) == current->children.end()) {
-                current->children[part] = new TreeNode(part);
+            if(cur->children.find(part) == cur->children.end()) {
+                cur->children[part] = new TreeNode(part);
             }
-            current = current->children[part];
+            cur = cur->children[part];
         }
     }
     return root;
 }
 
-void printFileTree(TreeNode *node, int indent = 0) {
+void printFile(TreeNode *node, int indent = 0) {
     if(!node) return;
-    std::cout << std::string(indent, ' ') << "- " << node->name << std::endl;
+    if(!node->name.empty()) std::cout << std::string(indent, ' ') << "- " << node->name << std::endl;
     for(const auto &child : node->children) {
-        printFileTree(child.second, indent + 2);
+        printFile(child.second, indent + 2);
     }
 }
+
 
 /*
     对于一个链表,给定一个正整数数组作为输入,分段做反转
