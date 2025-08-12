@@ -92,6 +92,8 @@ func main() {
 
 	time.Sleep(time.Second)
 
+	// 这里必须要加,因为最后一个协程会hang住,因为第三个协程对first这个channel写入数据后
+	// 未有其他协程从这个channel读取数据,会导致死锁
 	<-first
 
 	wg.Wait()
