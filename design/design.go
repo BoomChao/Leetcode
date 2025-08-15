@@ -5,7 +5,11 @@ import (
 	"time"
 )
 
-// 设计一个限流器,限制每秒的请求速率
+/*
+	设计一个限流器,限制每秒的请求速率
+*/
+
+// 1.使用互斥锁实现
 type RateLimiter struct {
 	rate   int         // 每秒允许的请求树
 	ticker time.Ticker // 定时器
@@ -38,6 +42,36 @@ func (rl *RateLimiter) Allow() bool {
 		return true
 	}
 	return false
+}
+
+// 2.使用channel实现
+type RateLimiter struct {
+	tokens chan struct{}
+}
+
+func NewRateLimiter(rate int) *RateLimiter {
+	rl := &RateLimiter{
+		tokens: make(chan struct{}, rate),
+	}
+	go func() {
+		for {
+			for i := 0; i < rate; i++ {
+				rl.tokens <- struct{}{}
+			}
+			// 等待一秒填充一次
+			time.Sleep(time.Second)
+		}
+	}()
+	return rl
+}
+
+func (rl *RateLimiter) Allow() bool {
+	select {
+	case <-rl.tokens:
+		return true
+	default:
+		return false
+	}
 }
 
 func main() {
