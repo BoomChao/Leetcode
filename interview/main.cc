@@ -102,3 +102,44 @@ void printFile(TreeNode *node, int indent = 0) {
     比如 [3,2,5]
     输出新链表: 3->2->1->5->4->9->8->7->6
 */
+
+// 思路参考Leetcode25: K个一组反转链表
+
+
+ListNode *reverse(ListNode *head, ListNode *tail) {
+    ListNode *prev = nullptr;
+    while(head != tail) {
+        ListNode *pNext = head->next;
+        head->next = prev;
+        prev = head;
+        head = pNext;
+    }
+    return prev;
+}
+
+ListNode* reverseKGroup(ListNode* head, std::vector<int> nums) {
+    ListNode *base = new ListNode(-1);
+    base->next = head;
+
+    ListNode *pNode = base;
+    int i = 0;
+
+    while(pNode) {
+        ListNode *prev = pNode;
+        if(i >= nums.size()) break;
+        int k = nums[i++];
+        for(int i = 0; i < k; i++) {
+            pNode = pNode->next;
+            if(pNode == nullptr) break;
+        }
+        ListNode *tail;
+        if(pNode == nullptr) tail = nullptr;
+        else tail = pNode->next;
+        ListNode *reverseList = reverse(prev->next, tail);
+        pNode = prev->next;
+        prev->next = reverseList;
+        pNode->next = tail;
+    }
+
+    return base->next;
+}
