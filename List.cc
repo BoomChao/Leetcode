@@ -146,7 +146,7 @@ ListNode* deleteNode(ListNode *head, ListNode *pDelete)
         cur = cur->next;
     }
 
-    if(cur == nullptr) return head;     //链表中没有要删除的节点pDelte
+    if(cur == nullptr) return head;     //链表中没有要删除的节点pDelete
 
     pre->next = pre->next->next;
 
