@@ -9,7 +9,7 @@
 // Leetcode第146题 : 设计LRU缓存机制
 // 关键在于list的操作以及对splice方法的使用
 
-class LRUCache()
+class LRUCache
 {
 public:
     LRUCache(int capacity) : size(capacity) {}
@@ -35,7 +35,7 @@ public:
         if(it != hash.end()) {
             it->second->second = value;     //如果key之前已经存在则重新赋值
             cache.splice(cache.begin(), cache, it->second);
-            return ;
+            return;
         }
 
         // cache.insert(cache.begin(), std::make_pair(key, value));    //将插入的元素放到list的首位
@@ -49,7 +49,6 @@ public:
         }
     }
 
-    
 private:
     std::list<std::pair<int,int>> cache;        //pair的第一个数存储的是key,第二个数存储的是对应的value
     std::unordered_map<int, std::list<std::pair<int,int>>::iterator> hash;      //这里的map第一个数存储的是key值,第二个数存储的是(key,value)在list中的位置
